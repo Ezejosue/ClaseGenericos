@@ -1,17 +1,21 @@
 package org.generic.generic;
 
+import poointerface.modelo.Cliente;
+import poointerface.modelo.BaseEntity;
+import poointerface.modelo.ClientePremium;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class EjemploGenericos {
+public class EjemploGenericos extends BaseEntity {
     public static void main(String[] args) {
         List<Cliente> clientes = new ArrayList<>();
         clientes.add(new Cliente("Josue", "Avalos"));
 
         Cliente josue = clientes.iterator().next();
 
-        Cliente[] clientesArreglo = {new Cliente ("Andres", "Guzman"), new Cliente("Pepe", "Gomez")};
+        Cliente[] clientesArreglo = {new Cliente("Andres", "Guzman"), new Cliente("Pepe", "Gomez")};
 
         Integer[] enterosArreglo = {1, 2, 3};
 
@@ -40,7 +44,35 @@ public class EjemploGenericos {
         return Arrays.asList(c);
     }
 
-    public static <T extends List<T> fromArrayToList(T[] c){
+    public static <T extends Number> List<T> fromArrayToList(T[] c) {
         return Arrays.asList(c);
     }
+
+    public static <T extends Cliente & Comparable<T>> List<T> fromArrayToList(T[] c) {
+        return Arrays.asList(c);
+    }
+
+    public static <T, G> List<T> fromArrayToList(T[] c, G[] x) {
+        for (G elemento : x) {
+            System.out.println(elemento);
+        }
+        return Arrays.asList(c);
+    }
+
+    public static void imprimirClientes(List<? extends Cliente> clientes) {
+        clientes.forEach(System.out::println);
+    }
+
+    public static <T extends Comparable<T>> T maximo(T a, T b, T c) {
+        T max = a;
+        if (b.compareTo(max) > 0) {
+            max = b;
+        }
+        if (c.compareTo(max) > 0) {
+            max = c;
+        }
+        return max;
+    }
+
+
 }
